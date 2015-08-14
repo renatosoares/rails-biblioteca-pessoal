@@ -24,6 +24,7 @@
     <%= f.text_field :editora %>
   </div>
   <div class="field">
+    <input type="hidden" name="book[user_id]" value="<%= session[:user_id] %>" id="book_user_id">
     <%= f.label :anoPublica %><br>
     <%= f.number_field :anoPublica %>
   </div>

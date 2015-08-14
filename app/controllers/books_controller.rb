@@ -1,10 +1,11 @@
 class BooksController < ApplicationController
+  #skip_before_action :authorize
   before_action :set_book, only: [:show, :edit, :update, :destroy]
 
   # GET /books
   # GET /books.json
   def index
-    @books = Book.all
+    @books = Book.where "user_id = ?", session[:user_id]
   end
 
   # GET /books/1
@@ -69,6 +70,6 @@ class BooksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
-      params.require(:book).permit(:titulo, :autores, :editora, :anoPublica)
+      params.require(:book).permit(:titulo, :autores, :editora, :anoPublica, :user_id)
     end
 end
