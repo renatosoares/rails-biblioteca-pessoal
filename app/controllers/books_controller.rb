@@ -6,6 +6,7 @@ class BooksController < ApplicationController
   # GET /books.json
   def index
     @books = Book.where "user_id = ?", session[:user_id]
+    @booksOrder = Book.all
   end
 
   # GET /books/1
@@ -30,6 +31,7 @@ class BooksController < ApplicationController
     respond_to do |format|
       if @book.save
         format.html { redirect_to @book, notice: 'Book was successfully created.' }
+        format.js
         format.json { render :show, status: :created, location: @book }
       else
         format.html { render :new }
