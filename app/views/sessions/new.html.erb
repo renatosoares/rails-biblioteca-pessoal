@@ -3,7 +3,8 @@
 		<p id="notice"><%= flash[:alert] %></p>
 	<% end %>
 	<%= form_tag sessions_create_path do %>
-		<fieldset>
+		<fieldset 	>
+		<button id="muda">Muda </button>
 			<legend>Please Log In</legend>
 			<div>
 				<%= label_tag :name, 'Name:' %>

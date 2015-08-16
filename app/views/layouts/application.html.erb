@@ -12,6 +12,7 @@
 	<% if session[:user_id] %>
 		<ul>
 			<li><%= link_to 'User',users_path%></li>
+      <li><%= link_to 'Books',books_path%></li>
 		</ul>
 		<%= button_to 'Logout', logout_path, method: :delete %>
 	<% end %>
