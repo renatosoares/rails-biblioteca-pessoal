@@ -6,18 +6,13 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = Book.order(:titulo).where "user_id = ?", session[:user_id]
-    @test = "test"
-    @booksOrder = Book.order(:titulo)
-    @booksOrders = Book.order(sort_column + ' ' + sort_direction)
+    @books = Book.where "user_id = ?", session[:user_id]
   end
-  private  
-  def sort_column  
-     Book.column_names.include?(params[:sort]) ? params[:sort] : "Titulo" 
-  end  
-    
-  def sort_direction  
-     %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc" 
+  def ordenar
+    @books = Book.order(:titulo).where "user_id = ?", session[:user_id]
+    respond_to do |format|
+      format.js
+    end
   end 
 
   # GET /books/1
@@ -42,7 +37,7 @@ class BooksController < ApplicationController
     respond_to do |format|
       if @book.save
         format.html { redirect_to @book, notice: 'Book was successfully created.' }
-        format.js { }
+        #format.js { }
         format.json { render :show, status: :created, location: @book }
       else
         format.html { render :new }

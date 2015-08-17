@@ -1,10 +1,10 @@
 class SessionsController < ApplicationController
 	skip_before_action :authorize
-  def new
+  def new # index
 
   end
 
-  def create
+  def create # login
   	user = User.find_by(name: params[:name])
 		if user and user.authenticate(params[:password])
 			session[:user_id] = user.id
@@ -16,7 +16,7 @@ class SessionsController < ApplicationController
 		end
   end
 
-  def destroy
+  def destroy # logout
   	session[:user_id] = nil
 		redirect_to login_url, notice: "Logged out"
   end

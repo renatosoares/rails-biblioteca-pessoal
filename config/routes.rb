@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     post 'login' => :create
     delete 'logout' => :destroy
   end
+  post 'books/ordenar', as: 'ordenar'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
