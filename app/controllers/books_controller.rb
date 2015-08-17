@@ -1,6 +1,7 @@
 class BooksController < ApplicationController
   #skip_before_action :authorize
   before_action :set_book, only: [:show, :edit, :update, :destroy]
+  helper_method :sort_column, :sort_direction 
 
   # GET /books
   # GET /books.json
@@ -8,10 +9,16 @@ class BooksController < ApplicationController
     @books = Book.order(:titulo).where "user_id = ?", session[:user_id]
     @test = "test"
     @booksOrder = Book.order(:titulo)
-    #respond_to do |format|
-    #  format.js { @current_books = @books }
-    #end
+    @booksOrders = Book.order(sort_column + ' ' + sort_direction)
   end
+  private  
+  def sort_column  
+     Book.column_names.include?(params[:sort]) ? params[:sort] : "Titulo" 
+  end  
+    
+  def sort_direction  
+     %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc" 
+  end 
 
   # GET /books/1
   # GET /books/1.json
