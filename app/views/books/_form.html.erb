@@ -28,6 +28,13 @@
     <%= f.label :anoPublica %><br>
     <%= f.number_field :anoPublica %>
   </div>
+  <div class="field">
+    <%= f.label :perdido %><br>
+    <label> Não </label>
+    <%= f.radio_button :perdido, "0" %>
+    <label>Sim </label>
+    <%= f.radio_button :perdido, "1" %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>
